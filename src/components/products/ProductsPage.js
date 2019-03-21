@@ -24,9 +24,9 @@ class ProductsPage extends React.Component {
     }
 
     if (businesses.length === 0) {
-      actions.loadBusinesses().catch(error => {
-        alert("Loading businesses failed" + error);
-      });
+      actions.loadBusinesses(); //.catch(error => {
+      //alert("Loading businesses failed" + error);
+      //});
     }
   }
 
