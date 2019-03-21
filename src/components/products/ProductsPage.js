@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import * as productActions from "../../redux/actions/productActions";
 import * as businessActions from "../../redux/actions/businessActions";
+import * as pingActions from "../../redux/actions/pingActions";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import ProductList from "./ProductList";
@@ -39,6 +40,10 @@ class ProductsPage extends React.Component {
     }
   };
 
+  handlePing = () => {
+    this.props.actions.ping();
+  };
+
   render() {
     return (
       <>
@@ -55,6 +60,13 @@ class ProductsPage extends React.Component {
             >
               Add Product
             </button>
+            <button
+              style={{ marginBottom: 20 }}
+              className="btn btn-primary add-course"
+              onClick={this.handlePing}
+            >
+              Ping: {this.props.isPinging.toString()}
+            </button>
             <ProductList
               onDeleteClick={this.handleDeleteProduct}
               products={this.props.products}
@@ -70,7 +82,8 @@ ProductsPage.propTypes = {
   products: PropTypes.array.isRequired,
   businesses: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired,
-  loading: PropTypes.bool.isRequired
+  loading: PropTypes.bool.isRequired,
+  isPinging: PropTypes.bool.isRequired
 };
 
 function mapStateToProps(state) {
@@ -87,7 +100,8 @@ function mapStateToProps(state) {
             };
           }),
     businesses: state.businesses,
-    loading: state.apiCallsInProgress > 0
+    loading: state.apiCallsInProgress > 0,
+    isPinging: state.isPinging
   };
 }
 
@@ -99,7 +113,8 @@ function mapDispatchToProps(dispatch) {
         businessActions.loadBusinesses,
         dispatch
       ),
-      deleteProduct: bindActionCreators(productActions.deleteProduct, dispatch)
+      deleteProduct: bindActionCreators(productActions.deleteProduct, dispatch),
+      ping: bindActionCreators(pingActions.ping, dispatch)
     }
   };
 }

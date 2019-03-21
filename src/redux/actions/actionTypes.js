@@ -11,3 +11,6 @@ export const API_CALL_ERROR = "API_CALL_ERROR";
 // If it had one, our apiCallsInProgress counter would be decremented below zero
 // because we're not incrementing the number of apiCallInProgress when the delete request begins.
 export const DELETE_PRODUCT_OPTIMISTIC = "DELETE_PRODUCT_OPTIMISTIC";
+
+export const PING = "PING";
+export const PONG = "PONG";
