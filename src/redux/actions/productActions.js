@@ -1,6 +1,7 @@
 import * as types from "./actionTypes";
 import * as productApi from "../../api/productApi";
 import { beginApiCall, apiCallError } from "./apiStatusActions";
+import { loadBusinesses } from "./businessActions";
 
 export const loadProductSuccess = products => ({
   type: types.LOAD_PRODUCTS_SUCCESS,
@@ -32,7 +33,8 @@ export const loadProducts = () => dispatch => {
     .catch(error => {
       dispatch(apiCallError(error));
       throw error;
-    });
+    })
+    .then(dispatch(loadBusinesses()));
 };
 
 export const saveProduct = product => dispatch => {

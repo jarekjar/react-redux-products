@@ -1,6 +1,6 @@
 import * as types from "./actionTypes";
 //import * as businessApi from "../../api/businessApi";
-//import { beginApiCall, apiCallError } from "./apiStatusActions";
+import { beginApiCall } from "./apiStatusActions";
 
 export const loadBusinessSuccess = businesses => ({
   type: types.LOAD_BUSINESSES_SUCCESS,
@@ -22,4 +22,8 @@ export const loadBusinessSuccess = businesses => ({
 
 //  ** ABOVE IS THUNK, BELOW IS AN ACTION FOR THE EPIC ** \\
 
-export const loadBusinesses = () => ({ type: types.LOAD_BUSINESSES });
+export const loadBusinessesEpic = () => ({ type: types.LOAD_BUSINESSES });
+export const loadBusinesses = () => dispatch => {
+  dispatch(beginApiCall());
+  dispatch(loadBusinessesEpic());
+};

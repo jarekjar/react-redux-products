@@ -22,7 +22,7 @@ const ProductList = ({ products, onDeleteClick }) => (
                 className="btn btn-light"
                 href={"http://google.com/search?q=" + product.slug}
               >
-                Watch
+                Details
               </a>
             </td>
             <td>

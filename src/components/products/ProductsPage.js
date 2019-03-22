@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import * as productActions from "../../redux/actions/productActions";
-import * as businessActions from "../../redux/actions/businessActions";
 import * as pingActions from "../../redux/actions/pingActions";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
@@ -15,18 +14,9 @@ class ProductsPage extends React.Component {
     redirectToAddProductPage: false
   };
   componentDidMount() {
-    const { products, businesses, actions } = this.props;
-
+    const { products, actions } = this.props;
     if (products.length === 0) {
-      actions.loadProducts().catch(error => {
-        alert("Loading products failed" + error);
-      });
-    }
-
-    if (businesses.length === 0) {
-      actions.loadBusinesses(); //.catch(error => {
-      //alert("Loading businesses failed" + error);
-      //});
+      actions.loadProducts();
     }
   }
 
@@ -109,10 +99,6 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: {
       loadProducts: bindActionCreators(productActions.loadProducts, dispatch),
-      loadBusinesses: bindActionCreators(
-        businessActions.loadBusinesses,
-        dispatch
-      ),
       deleteProduct: bindActionCreators(productActions.deleteProduct, dispatch),
       ping: bindActionCreators(pingActions.ping, dispatch)
     }
